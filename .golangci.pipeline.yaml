@@ -1,0 +1,51 @@
+# golangci-lint v2 configuration
+version: 2
+
+run:
+  concurrency: 8
+  timeout: 10m
+  tests: true
+  skip-dirs:
+    - bin
+    - vendor
+    - var
+    - tmp
+    - .cache
+  skip-files:
+    - \.pb\.go$
+    - \.pb\.gw\.go$
+
+output:
+  format: colored-line-number
+  print-issued-lines: true
+  print-linter-name: true
+
+linters:
+  disable-all: true
+  enable:
+    - errcheck
+    - goconst
+    - gosec
+    - govet
+    - ineffassign
+    - revive
+    - unused
+
+linters-settings:
+  govet:
+    enable-all: true
+    disable:
+      - shadow
+  dupl:
+    threshold: 100
+  goconst:
+    min-len: 2
+    min-occurrences: 2
+
+issues:
+  exclude-use-default: false
+  exclude:
+    - G104
+    - exported func .* returns unexported type .*, which can be annoying to use
+    - should have a package comment
+    - don't use an underscore in package name
