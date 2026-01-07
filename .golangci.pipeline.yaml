@@ -1,19 +1,12 @@
-# Обрати внимание: версия должна быть строкой
 version: '2'
 
 run:
   timeout: 10m
   tests: true
-  # Поля 'skip-dirs' и 'skip-files' удалены из этого блока,
-  # так как линтер 2.7.2 считает их недопустимыми здесь.
 
-output:
-  # В версии 2.7.2 поля 'print-linter-name', 'format', 'print-issued-lines'
-  # вызывают ошибку валидации в блоке output. Оставляем только базу.
-  sort-results: true
+output: {}
 
 linters:
-  # Поле 'disable-all' удалено, так как оно не проходит валидацию 2.7.2
   enable:
     - errcheck
     - goconst
@@ -24,13 +17,6 @@ linters:
     - unused
     - staticcheck
 
-# Блок 'linters-settings' переименован или удален,
-# если валидатор 2.7.2 его не пропускает.
-# В логах была ошибка: additional properties 'linters-settings' not allowed.
-# Переносим настройки в соответствующие блоки, если это поддерживает твоя версия.
-
 issues:
-  # Поля 'exclude-use-default' и 'exclude' вызывали ошибку валидации.
-  # Оставляем блок пустым или используем только разрешенные свойства.
   max-issues-per-linter: 0
   max-same-issues: 0
