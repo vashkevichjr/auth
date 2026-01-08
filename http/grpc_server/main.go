@@ -1,3 +1,4 @@
+// Package main starts the gRPC server.
 package main
 
 import (
@@ -20,12 +21,11 @@ type server struct {
 	user_v1.UnimplementedUserServiceServer
 }
 
-func (s *server) CreateUser(ctx context.Context, req *user_v1.CreateUserRequest) (*user_v1.CreateUserResponse, error) {
-	return &user_v1.CreateUserResponse{Id: int64(gofakeit.Uint64())}, nil
+func (s *server) CreateUser(_ context.Context, req *user_v1.CreateUserRequest) (*user_v1.CreateUserResponse, error) {
+	return &user_v1.CreateUserResponse{Id: gofakeit.Int64()}, nil
 }
 
-func (s *server) GetUser(ctx context.Context, req *user_v1.GetUserRequest) (*user_v1.GetUserResponse, error) {
-
+func (s *server) GetUser(_ context.Context, req *user_v1.GetUserRequest) (*user_v1.GetUserResponse, error) {
 	return &user_v1.GetUserResponse{
 		Id:        req.Id,
 		Name:      gofakeit.Name(),
@@ -36,11 +36,11 @@ func (s *server) GetUser(ctx context.Context, req *user_v1.GetUserRequest) (*use
 	}, nil
 }
 
-func (s *server) UpdateUser(ctx context.Context, req *user_v1.UpdateUserRequest) (*emptypb.Empty, error) {
+func (s *server) UpdateUser(_ context.Context, req *user_v1.UpdateUserRequest) (*emptypb.Empty, error) {
 	return &emptypb.Empty{}, nil
 }
 
-func (s *server) DeleteUser(ctx context.Context, req *user_v1.DeleteUserRequest) (*emptypb.Empty, error) {
+func (s *server) DeleteUser(_ context.Context, req *user_v1.DeleteUserRequest) (*emptypb.Empty, error) {
 	return &emptypb.Empty{}, nil
 }
 
